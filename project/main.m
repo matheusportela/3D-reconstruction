@@ -1,3 +1,10 @@
+% Eduardo Neiva - u5257353
+% Luiz Moreira - u5250345
+% Matheus Portela - u5250333
+% Thiago Oliveira - u5249937
+% ENGN4528 - COMPUTER VISION PROJECT
+% PROJECT 1
+
 
 addpath('../data/contour')
 addpath('../data/images')
