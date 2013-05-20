@@ -1,4 +1,6 @@
 
+addpath('../data/contour')
+addpath('../data/images')
 %% Setup
 %It is loaded all the functions and the imagepath
 import spacecarving.*;
@@ -7,10 +9,8 @@ close all;
 
 
 %% Load the Camera and Image Data
-% This reads the "Dinosaur" directory, loading the camera definitions
-% (internal and external calibration) and image file for each camera. These
-% calibrations have previously been determined from the
-% images using an automatic process that we won't worry about here.
+% This reads the "/data/images" directory, loading the camera definitions
+% (internal and external calibration) and image file for each camera.
 cameras = loadcameradata( datadir );
 
 
