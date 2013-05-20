@@ -37,7 +37,7 @@ end
 % Now draw it
 ptch = patch( isosurface( X, Y, Z, V, 0.5 ) );
 isonormals( X, Y, Z, V, ptch )
-set( ptch, 'FaceColor', 'g', 'EdgeColor', 'black' );
+set( ptch, 'EdgeColor', 'white' );
 
 set(gca,'DataAspectRatio',[1 1 1]);
 xlabel('X');

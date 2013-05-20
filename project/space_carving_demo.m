@@ -45,7 +45,7 @@ zlim = [-100, 550];
 % component xyz, thereby increasing this number reduces the spread between
 % each voxel and increases the accuracy of the model. This comes at a cost
 % of a increased run time and memory usage.
-voxels = makevoxels( xlim, ylim, zlim, 500000 );
+voxels = makevoxels( xlim, ylim, zlim, 50000 );
 starting_volume = numel( voxels.XData );
 
 
