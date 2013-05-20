@@ -78,8 +78,11 @@ axis off;
 % <http://www.mathworks.com/access/helpdesk/help/toolbox/images/bwareaopen.html |bwareaopen|>
 % and <http://www.mathworks.com/access/helpdesk/help/toolbox/images/imclose.html |imclose|>
 % are your friends for this job!
+
+SI = generate_silhouettes();
+
 for c=1:numel(cameras)
-    cameras(c).Silhouette = getsilhouette( cameras(c).Image );
+    cameras(c).Silhouette = getsilhouette( c, SI );
 end
 
 figure('Position',[100 100 600 300]);
@@ -103,7 +106,7 @@ makeFullAxes( gcf );
 % using all the cameras to narrow down exactly where the object is. This
 % isn't foolproof, but good enough for this demo.
 %[xlim,ylim,zlim] = findmodel( cameras );
-test = 500;
+test = 1000;
 
 xlim = [-test, test];
 ylim = [-test, test];
@@ -122,7 +125,7 @@ zlim = [-test, test];
 % representations give much better efficiency, both in memory and
 % computational time.
 %50 000 000
-voxels = makevoxels( xlim, ylim, zlim, 500000 );
+voxels = makevoxels( xlim, ylim, zlim, 5000000 );
 starting_volume = numel( voxels.XData );
 
 % Show the whole scene
