@@ -1,41 +1,45 @@
-function [voxels,keep] = carve( voxels, camera )
-%CARVE: remove voxels that are not in the silhouette
+function [voxels,voxelsKept] = carve( voxels, camera )
+% carve( voxels, camera )
+%  This function is used to remove all the voxels that are outside of the
+%  sillhouete, creating a carving effect.
+% 
+% ARGUMENTS:
+% VOXELS = this arguments contains the voxels to be cropped. The amount of
+% voxels will reduce as the number of carves is increased.
 %
-%   VOXELS = CARVE(VOXELS,CAMERA) carves away voxels that are not inside
-%   the silhouette contained in CAMERA. The resulting voxel array is
-%   returned.
 %
-%   [VOXELS,KEEP] = CARVE(VOXELS,CAMERA) also returns the indices of the
-%   voxels that were retained.
+% CAMERA = this is a struct that contains all the information of the that
+% image. Thus, the sillhouete of the camera can be accessed as
+% camera.Sillhouete
 %
-%   Example:
-%   >> camera = loadcameradata(1);
-%   >> camera.Silhouette = getsilhouette( camera.Image );
-%   >> voxels = carve( makevoxels(50), camera );
-%   >> showscene( camera, voxels );
 %
-%   See also: LOADCAMERADATA
-%             MAKEVOXELS
-%             CARVEALL
-
-%   Copyright 2005-2009 The MathWorks, Inc.
-%   $Revision: 1.0 $    $Date: 2006/06/30 00:00:00 $
+% RETURNS:
+% VOXELS = the returned voxels will contain the next voxel matrix with the
+% camera sillhouete carve applied onto it
+%
+% KEEP = contain the indeces of the voxel that were kept during the process
+% of carving
 
 
 % Project into image
 [x,y] = spacecarving.project( camera, voxels.XData, voxels.YData, voxels.ZData );
 
-% Clear any that are out of the image
-[h,w,d] = size(camera.Image); %#ok<NASGU>
-keep = find( (x>=1) & (x<=w) & (y>=1) & (y<=h) );
-x = x(keep);
-y = y(keep);
+%From all the voxels continaed initially, remove all those are not in the
+%image
+[h,w,d] = size(camera.Image); 
+voxelsKept = find( (x>=1) & (x<=w) & (y>=1) & (y<=h) );
 
-% Now clear any that are not inside the silhouette
+%update the x and y values removing the values not necessary.
+x = x(voxelsKept);
+y = y(voxelsKept);
+
+% this is the proper carving, this create a matrix of indices that will
+% refer to voxels that will be removed and kept.
 ind = sub2ind( [h,w], round(y), round(x) );
-keep = keep(camera.Silhouette(ind) >= 1);
+voxelsKept = voxelsKept(camera.Silhouette(ind) >= 1);
 
-voxels.XData = voxels.XData(keep);
-voxels.YData = voxels.YData(keep);
-voxels.ZData = voxels.ZData(keep);
-voxels.Value = voxels.Value(keep);
+%update the voxels with the new carved voxels
+voxels.XData = voxels.XData(voxelsKept);
+voxels.YData = voxels.YData(voxelsKept);
+voxels.ZData = voxels.ZData(voxelsKept);
+voxels.Value = voxels.Value(voxelsKept);

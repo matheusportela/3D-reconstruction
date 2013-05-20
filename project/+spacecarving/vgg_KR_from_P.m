@@ -1,3 +1,8 @@
+
+function [K, R, t] = vgg_KR_from_P(P, noscale)
+% This function was used in the C-LAB 6, so we are basicly reusing it since
+% it was necessary to uqet the K,R,T values from a 
+%
 %VGG_KR_FROM_P Extract K, R from camera matrix.
 %
 %    [K,R,t] = VGG_KR_FROM_P(P [,noscale]) finds K, R, t such that P = K*R*[eye(3) -t].
@@ -11,9 +16,6 @@
 % Author: Andrew Fitzgibbon <awf@robots.ox.ac.uk>
 % Modified by werner.
 % Date: 15 May 98
-
-
-function [K, R, t] = vgg_KR_from_P(P, noscale)
 
 N = size(P,1);
 H = P(:,1:N);
