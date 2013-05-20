@@ -4,7 +4,7 @@ close all
 addpath('code/third_party')
 
 %% Read images
-nImages = 24;
+nImages = 2;
 colors = ['r' 'g' 'b' 'y' 'k'];
 
 for image_number = 0:(nImages - 1);
