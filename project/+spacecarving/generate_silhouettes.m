@@ -1,5 +1,6 @@
 function generate_silhouettes()
 %% generate silhouettes
+    import spacecarving.*;
 
     for j=0:23
         image = read_image(j);
