@@ -1,7 +1,7 @@
 function contour = read_contour(imagenumber)
 
 imageFileNumber = sprintf('%.4d', imagenumber);
-imageFile = strcat('../data/contour/', imageFileNumber, '.txt');
+imageFile = strcat('data/contour/', imageFileNumber, '.txt');
 fp = fileread(imageFile);
 
 %% Parse lines

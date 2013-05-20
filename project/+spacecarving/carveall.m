@@ -1,11 +1,13 @@
 function voxels = carveall( voxels, cameras )
-%CARVEALL  carve away voxels using all cameras
+% carvelall( voxels, cameras ) this function is used to carve the initial
+% voxel matrix using a set of cameras.
 %
-%   VOXELS = CARVEALL(VOXELS, CAMERAS) simple calls CARVE for each of the
-%   cameras specified
-
-%   Copyright 2005-2009 The MathWorks, Inc.
-%   $Revision: 1.0 $    $Date: 2006/06/30 00:00:00 $
+%  VOXELS = initial voxels that will be used in the carving - this should
+%  be initialized before calling this function
+%
+% CAMERAS = all the cameras that will be used in the carving process. All
+% the cameras contains their information of its sillhuete
+%
 
 for ii=1:numel(cameras);
     voxels = carve(voxels,cameras(ii));
