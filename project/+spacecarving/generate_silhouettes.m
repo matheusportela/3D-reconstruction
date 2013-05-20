@@ -25,15 +25,15 @@ function generate_silhouettes()
 
         se= [0 1 0; 1 1 1; 0 1 0];    
 
-        A = imdilate(A, se1);
-        A = imdilate(A, se1);
-        A = imerode(A, se1);
-        A = imdilate(A, se1);
-        A = imerode(A, se1);
-        A = imdilate(A, se1);
-        A = imerode(A, se1);
-        A = imdilate(A, se1);
-        A = imerode(A, se1);
+        A = imdilate(A, se);
+        A = imdilate(A, se);
+        A = imerode(A, se);
+        A = imdilate(A, se);
+        A = imerode(A, se);
+        A = imdilate(A, se);
+        A = imerode(A, se);
+        A = imdilate(A, se);
+        A = imerode(A, se);
 
         B = imfill(A);
 
@@ -41,17 +41,17 @@ function generate_silhouettes()
 
     end
 
-%     %% TEST - vizualize silhouettes
-%     for i = 1:24
-%         image = read_image(i-1);
-%         aux = [rgb2gray(image) SI(i).si*255];
-%     %     aux = SI(i).si*255;
-% 
-%         imshow(aux);
-%         pause(0.05);
-%         figure
-%         imshow(aux)
-%     end
+    %% TEST - vizualize silhouettes
+    for i = 1:24
+        image = read_image(i-1);
+        aux = [rgb2gray(image) SI(i).si*255];
+        aux = SI(i).si*255;
+
+        imshow(aux);
+        pause(0.05);
+        figure
+        imshow(aux)
+    end
 end
     
     
