@@ -5,7 +5,7 @@
 % ENGN4528 - COMPUTER VISION PROJECT
 % PROJECT 1
 
-
+resolution = 500000;
 addpath('../data/contour')
 addpath('../data/images')
 %% Setup
@@ -51,7 +51,7 @@ z_boundaries = [-100, 550];
 % component xyz, thereby increasing this number reduces the spread between
 % each voxel and increases the accuracy of the model. This comes at a cost
 % of a increased run time and memory usage.
-voxels = generate_voxels( x_boundaries, y_boundaries, z_boundaries, 500 );
+voxels = generate_voxels( x_boundaries, y_boundaries, z_boundaries, resolution );
 
 
 
@@ -65,16 +65,4 @@ figure();
 build_model(voxels);
 grid on;
 title( '3D Morpheus Reconstruction Model' )
-
-
-
-
-%% Coloring
-%In this part, we color de voxels by extracting information of the images.
-figure();
-ptch = build_model( voxels );
-build_coloured_model( ptch, cameras );
-grid on;
-title( '3D Colorful Morpheus Image Reconstruction' )
-
 
