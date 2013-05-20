@@ -1,5 +1,5 @@
-function voxels = makevoxels(qtd_x, qtd_y, qtd_z, N)
-%% makevoxels - creates a grid for the future carving
+function voxels = generate_voxels(qtd_x, qtd_y, qtd_z, N)
+%% generate_voxels - creates a grid for the future carving
 % ARGUMENTS:
 %     qtd_x = inferior and superior limits of the X coordinate in the 3D
 %     world - ex: [inf_x sup_x]

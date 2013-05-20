@@ -1,5 +1,5 @@
-function direction = getcameradirection(camera)
-% getcameradirection(camera)
+function normal_vector = get_normal_vector(camera)
+%  get_normal_vector(camera)
 %   This function returns a unitary 3D vector pointing to the direction
 %   focused by camera
 %
@@ -9,7 +9,7 @@ function direction = getcameradirection(camera)
 %
 %
 % RETURNS:
-% DIRECTION = Unitary vector
+% NORMAL_VECTOR = Unitary vector
 %
 
 % Image sizes in the X and Y axes
@@ -28,4 +28,4 @@ X = camera.K\centre; % equivalent to inv(camera.K)*centre
 X = camera.R'*X;
 
 % Normalise to transform to 3D
-direction = X./norm(X);
+normal_vector = X./norm(X);

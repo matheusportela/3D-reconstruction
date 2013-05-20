@@ -1,5 +1,5 @@
-function [X_2D, Y_2D] = project( camera, X_3D, Y_3D, Z_3D )
-%% project: project a 3d-point into a 2d-point.
+function [X_2D, Y_2D] = project_3d_to_2d( camera, X_3D, Y_3D, Z_3D )
+%% project_3d_to_2d: project a 3d-point into a 2d-point.
 % ARGUMENTS:
 % 
 %     CAMERA = Camera information. Needs only the matrix P, that contains
@@ -13,7 +13,7 @@ function [X_2D, Y_2D] = project( camera, X_3D, Y_3D, Z_3D )
 %     X_2D = x coordinate on 2-dimensional image
 %     Y_2D = y coordinate on 2-dimensional image
 
-P = camera.rawP;
+P = camera.P;
 
 k = P(3,1) * X_3D + P(3,2) * Y_3D + P(3,3) * Z_3D + P(3,4);
 Y_2D = round( (P(2,1) * X_3D + P(2,2) * Y_3D + P(2,3) * Z_3D + P(2,4)) ./ k);

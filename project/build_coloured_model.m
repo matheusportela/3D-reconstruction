@@ -1,5 +1,5 @@
-function colorsurface( ptch, cameras )
-% colorsurface( ptch, cameras )
+function build_coloured_model( ptch, cameras )
+% coloured_model( ptch, cameras )
 %   This function 'paints' the 3D model based on the colors from the
 %   original images. It uses the nearest image pixel to get the color.
 %
@@ -17,7 +17,7 @@ num_vert = size( vert, 1 );
 num_cam = numel( cameras );
 cam_normals = zeros( 3, num_cam );
 for ii=1:num_cam
-    cam_normals(:,ii) = spacecarving.getcameradirection( cameras(ii) );
+    cam_normals(:,ii) = get_normal_vector( cameras(ii) );
 end
 
 % Use the normal to find the best camera and view the value.
@@ -27,7 +27,7 @@ for ii=1:num_vert
     angles = normals(ii,:)*cam_normals./norm(normals(ii,:));
     [~,cam_idx] = min( angles );
     % And projects the vertex into the chosen one
-    [imx,imy] = spacecarving.project( cameras(cam_idx), ...
+    [imx,imy] = project_3d_to_2d( cameras(cam_idx), ...
         vert(ii,1), vert(ii,2), vert(ii,3) );
     vertexcdata(ii,:) = double( cameras(cam_idx).Image( round(imy), round(imx), : ) )/255;
 end

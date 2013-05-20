@@ -1,5 +1,5 @@
-function ptch = showsurface( voxels )
-% showsurface( voxels )
+function ptch = build_model( voxels )
+% build_model( voxels )
 %  This function is used to draw a surface based on the provided voxels 
 %  structure. It uses Matlab's ISOSURFACE command to do that.
 % 

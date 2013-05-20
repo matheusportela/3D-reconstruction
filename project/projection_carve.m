@@ -1,5 +1,5 @@
-function [voxels,voxelsKept] = carve( voxels, camera )
-% carve( voxels, camera )
+function [voxels,voxelsKept] = projection_carve( voxels, camera )
+% projection_carve( voxels, camera )
 %  This function is used to remove all the voxels that are outside of the
 %  sillhouete, creating a carving effect.
 % 
@@ -17,12 +17,12 @@ function [voxels,voxelsKept] = carve( voxels, camera )
 % VOXELS = the returned voxels will contain the next voxel matrix with the
 % camera sillhouete carve applied onto it
 %
-% KEEP = contain the indeces of the voxel that were kept during the process
+% VOXELSKEPT = contain the indeces of the voxel that were kept during the process
 % of carving
 
 
 % Project into image
-[x,y] = spacecarving.project( camera, voxels.XData, voxels.YData, voxels.ZData );
+[x,y] = project_3d_to_2d( camera, voxels.XData, voxels.YData, voxels.ZData );
 
 %From all the voxels continaed initially, remove all those are not in the
 %image
