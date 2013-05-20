@@ -1,22 +1,24 @@
-function voxels = makevoxels(xlim,ylim,zlim,N)
-%MAKEVOXELS  create a basic grid of voxels ready for carving
-%
-%   VOXELS = MAKEVOXELS(N) makes a grid of voxels of size NxNxN in a
-%   pre-defined volume.
+function voxels = makevoxels(qtd_x, qtd_y, qtd_z, N)
+%% makevoxels - creates a grid for the future carving
+% ARGUMENTS:
+%     qtd_x = inferior and superior limits of the X coordinate in the 3D
+%     world - ex: [inf_x sup_x]
+%     qtd_y = inferior and superior limits of the Y coordinate in the 3D
+%     world - ex: [inf_x sup_x]
+%     qtd_z = inferior and superior limits of the Z coordinate in the 3D
+%     world - ex: [inf_x sup_x]
+%     N = amount of voxels to be created
+% 
+% RETURNS: 
+%     VOXELS = grid
 
-%   Copyright 2005-2009 The MathWorks, Inc.
-%   $Revision: 1.0 $    $Date: 2006/06/30 00:00:00 $
-
-error( nargchk( 4, 4, nargin ) );
 
 
-% We need to create cube-shaped voxels, so choose a resolution to give
-% roughly N voxels
-volume = diff( xlim ) * diff( ylim ) * diff( zlim );
+volume = (qtd_x(2) - qtd_x(1)) * (qtd_y(2) - qtd_y(1)) * (qtd_z(2) - qtd_z(1));
 voxels.Resolution = power( volume/N, 1/3 );
-x = xlim(1) : voxels.Resolution : xlim(2);
-y = ylim(1) : voxels.Resolution : ylim(2);
-z = zlim(1) : voxels.Resolution : zlim(2);
+x = qtd_x(1) : voxels.Resolution : qtd_x(2);
+y = qtd_y(1) : voxels.Resolution : qtd_y(2);
+z = qtd_z(1) : voxels.Resolution : qtd_z(2);
 
 
 [X,Y,Z] = meshgrid( x, y, z );
