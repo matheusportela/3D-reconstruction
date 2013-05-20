@@ -1,0 +1,36 @@
+function [X_2D, Y_2D] = project( camera, X_3D, Y_3D, Z_3D )
+%PROJECT: project a 3D point into an image
+%
+%   [IM_X,IM_Y] = PROJECT(CAMERA,X_3D,Y_3D,Z_3D) projects one or
+%   more 3D point in the world coordinate frame into image coordinates
+
+%   Copyright 2005-2009 The MathWorks, Inc.
+%   $Revision: 1.0 $    $Date: 2006/06/30 00:00:00 $
+
+%% project: project a 3d-point into a 2d-point.
+% ARGUMENTS:
+% 
+%     CAMERA = Camera information. Needs only the matrix P, that contains
+%     the rotation and the translation of the camera in relation to the
+%     center point coordinates.
+%     X_3D = x coordinate on 3-dimensional world
+%     Y_3D = y coordinate on 3-dimensional world
+%     Z_3D = z coordinate on 3-dimensional world
+% 
+% RETURNS:
+%     X_2D = x coordinate on 2-dimensional image
+%     Y_2D = y coordinate on 2-dimensional image
+
+[x y k]' = (camera.rawP * [ X_3D; Y_3D; Z_3D; 1 ]);
+
+X_2D = x/k;
+Y_2D = y/k;
+
+% k = camera.rawP(3,1) * X_3D + camera.rawP(3,2) * Y_3D + camera.rawP(3,3) * Z_3D + camera.rawP(3,4);
+% 
+% X_2D = round( (camera.rawP(2,1) * X_3D + camera.rawP(2,2) * Y_3D + camera.rawP(2,3) * Z_3D  + camera.rawP(2,4)) ./ k);
+% 
+% Y_2D = round( (camera.rawP(1,1) * X_3D ...
+%     + camera.rawP(1,2) * Y_3D ...
+%     + camera.rawP(1,3) * Z_3D ...
+%     + camera.rawP(1,4)) ./ k);
