@@ -43,7 +43,6 @@ set(gca,'DataAspectRatio',[1 1 1]);
 xlabel('X');
 ylabel('Y');
 zlabel('Z');
-view(-140,22)
+view(130,-25)
 lighting( 'gouraud' )
-camlight( 'right' )
 axis( 'tight' )

@@ -22,21 +22,21 @@ function [voxels,voxelsKept] = projection_carve( voxels, camera )
 
 
 % Project into image
-[x,y] = project_3d_to_2d( camera, voxels.XData, voxels.YData, voxels.ZData );
+[x_proj,y_proj] = project_3d_to_2d( camera, voxels.XData, voxels.YData, voxels.ZData );
 
 %From all the voxels continaed initially, remove all those are not in the
 %image
 [h,w,d] = size(camera.Image); 
-voxelsKept = find( (x>=1) & (x<=w) & (y>=1) & (y<=h) );
+voxelsKept = find( (x_proj>=1) & (x_proj<=w) & (y_proj>=1) & (y_proj<=h) );
 
 %update the x and y values removing the values not necessary.
-x = x(voxelsKept);
-y = y(voxelsKept);
+x_proj = x_proj(voxelsKept);
+y_proj = y_proj(voxelsKept);
 
 % this is the proper carving, this create a matrix of indices that will
 % refer to voxels that will be removed and kept.
-ind = sub2ind( [h,w], round(y), round(x) );
-voxelsKept = voxelsKept(camera.Silhouette(ind) >= 1);
+ind = sub2ind( [h,w], round(y_proj), round(x_proj) );
+voxelsKept = voxelsKept(camera.Silhouette(ind) == 1);
 
 %update the voxels with the new carved voxels
 voxels.XData = voxels.XData(voxelsKept);
